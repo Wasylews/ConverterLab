@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Converter Lab</string>
+    <string name="search_title">Поиск</string>
+    <string name="link_title">Открыть сайт</string>
+    <string name="map_title">Показать на карте</string>
+    <string name="phone_title">Позвонить</string>
+    <string name="details_title">Подробнее</string>
 </resources>
