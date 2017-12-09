@@ -3,6 +3,7 @@ package com.genius.wasylews.domain.usecase;
 import com.genius.wasylews.domain.model.Organization;
 import com.genius.wasylews.domain.repository.Repository;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +34,7 @@ public class GetOrganizationListTest {
 
     @Test
     public void testGetOrganizationListSuccess() throws Exception {
-        mGetOrganizationList.execute().test().assertValueCount(1);
+        Assert.assertEquals(mGetOrganizationList.execute().size(), 1);
         verify(mMockRepository).getOrganizations();
         verifyNoMoreInteractions(mMockRepository);
     }
