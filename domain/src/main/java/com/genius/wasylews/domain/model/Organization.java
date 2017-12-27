@@ -3,22 +3,13 @@ package com.genius.wasylews.domain.model;
 import java.util.Map;
 
 public class Organization {
-
-    private Integer mId;
     private String mTitle;
-    private String mRegionId;
-    private String mCityId;
+    private String mRegion;
+    private String mCity;
     private String mPhone;
     private String mAddress;
+    private String mLink;
     private Map<String, Currency> mCurrencies;
-
-    public Organization(Integer id) {
-        mId = id;
-    }
-
-    public Integer getId() {
-        return mId;
-    }
 
     public String getTitle() {
         return mTitle;
@@ -28,20 +19,20 @@ public class Organization {
         mTitle = title;
     }
 
-    public String getRegionId() {
-        return mRegionId;
+    public String getRegion() {
+        return mRegion;
     }
 
-    public void setRegionId(String regionId) {
-        mRegionId = regionId;
+    public void setRegion(String region) {
+        mRegion = region;
     }
 
-    public String getCityId() {
-        return mCityId;
+    public String getCity() {
+        return mCity;
     }
 
-    public void setCityId(String cityId) {
-        mCityId = cityId;
+    public void setCity(String city) {
+        mCity = city;
     }
 
     public String getPhone() {
@@ -58,6 +49,14 @@ public class Organization {
 
     public void setAddress(String address) {
         mAddress = address;
+    }
+
+    public String getLink() {
+        return mLink;
+    }
+
+    public void setLink(String link) {
+        mLink = link;
     }
 
     public Map<String, Currency> getCurrencies() {

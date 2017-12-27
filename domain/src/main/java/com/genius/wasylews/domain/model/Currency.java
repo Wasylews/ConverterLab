@@ -1,10 +1,10 @@
 package com.genius.wasylews.domain.model;
 
-
-class Currency {
-
+public class Currency {
     private String mAsk;
     private String mBid;
+    private String mCode;
+    private String mName;
 
     public String getAsk() {
         return mAsk;
@@ -20,5 +20,21 @@ class Currency {
 
     public void setBid(String bid) {
         mBid = bid;
+    }
+
+    public String getCode() {
+        return mCode;
+    }
+
+    public void setCode(String code) {
+        mCode = code;
+    }
+
+    public String getName() {
+        return mName;
+    }
+
+    public void setName(String name) {
+        mName = name;
     }
 }
