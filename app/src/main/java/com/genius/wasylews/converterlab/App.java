@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.genius.wasylews.converterlab.di.component.DaggerAppComponent;
+import com.raizlabs.android.dbflow.config.FlowManager;
 
 import javax.inject.Inject;
 
@@ -21,6 +22,8 @@ public class App extends Application implements HasActivityInjector {
     public void onCreate() {
         super.onCreate();
         DaggerAppComponent.create().inject(this);
+
+        FlowManager.init(this);
     }
 
     @Override
