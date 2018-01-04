@@ -1,6 +1,6 @@
 package com.genius.wasylews.domain.model;
 
-import java.util.Map;
+import java.util.List;
 
 public class Organization {
     private String mTitle;
@@ -9,7 +9,7 @@ public class Organization {
     private String mPhone;
     private String mAddress;
     private String mLink;
-    private Map<String, Currency> mCurrencies;
+    private List<Currency> mCurrencies;
 
     public String getTitle() {
         return mTitle;
@@ -59,11 +59,11 @@ public class Organization {
         mLink = link;
     }
 
-    public Map<String, Currency> getCurrencies() {
+    public List<Currency> getCurrencies() {
         return mCurrencies;
     }
 
-    public void setCurrencies(Map<String, Currency> currencies) {
+    public void setCurrencies(List<Currency> currencies) {
         mCurrencies = currencies;
     }
 }
