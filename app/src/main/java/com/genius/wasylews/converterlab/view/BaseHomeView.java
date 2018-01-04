@@ -10,4 +10,8 @@ public interface BaseHomeView {
     void showOrganizations(List<Organization> list);
 
     void showOrganizationDetails(Organization organization);
+
+    void showProgress();
+
+    void hideProgress();
 }

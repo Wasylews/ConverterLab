@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 import com.genius.wasylews.converterlab.R;
 import com.genius.wasylews.converterlab.presenter.HomePresenter;
@@ -30,6 +32,9 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView {
 
     @BindView(R.id.home_activity_recycler_view)
     RecyclerView mRecyclerView;
+
+    @BindView(R.id.progress_text_view)
+    TextView mProgressTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,5 +65,15 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView {
 
     @Override
     public void showOrganizationDetails(Organization organization) {
+    }
+
+    @Override
+    public void showProgress() {
+        mProgressTextView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        mProgressTextView.setVisibility(View.GONE);
     }
 }
