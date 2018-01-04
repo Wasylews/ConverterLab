@@ -51,6 +51,7 @@ public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdap
 
     public void setOrganizations(List<Organization> organizations) {
         mOrganizations = organizations;
+        notifyDataSetChanged();
     }
 
     class OrganizationViewHolder extends RecyclerView.ViewHolder {
