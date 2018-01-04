@@ -3,13 +3,14 @@ package com.genius.wasylews.data.net.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class ServiceResponse {
 
     @SerializedName("date")
-    private String mDate;
+    private Date mDate;
 
     @SerializedName("organizations")
     private List<OrganizationEntity> mOrganizationList;
@@ -23,11 +24,11 @@ public class ServiceResponse {
     @SerializedName("cities")
     private Map<String, String> mCities;
 
-    public String getDate() {
+    public Date getDate() {
         return mDate;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.mDate = date;
     }
 
