@@ -1,24 +1,24 @@
 package com.genius.wasylews.domain.model;
 
 public class Currency {
-    private String mAsk;
-    private String mBid;
+    private Double mAsk;
+    private Double mBid;
     private String mCode;
     private String mName;
 
-    public String getAsk() {
+    public Double getAsk() {
         return mAsk;
     }
 
-    public void setAsk(String ask) {
+    public void setAsk(Double ask) {
         mAsk = ask;
     }
 
-    public String getBid() {
+    public Double getBid() {
         return mBid;
     }
 
-    public void setBid(String bid) {
+    public void setBid(Double bid) {
         mBid = bid;
     }
 
