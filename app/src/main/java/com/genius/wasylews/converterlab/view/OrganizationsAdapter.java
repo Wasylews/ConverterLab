@@ -41,6 +41,12 @@ public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdap
         Organization item = mOrganizations.get(position);
 
         holder.organizationNameTextView.setText(item.getTitle());
+        holder.organizationRegionTextView.setText(item.getRegion());
+        holder.organizationCityTextView.setText(item.getCity());
+        holder.organizationPhoneTextView.setText(item.getPhone());
+        holder.organizationLocationTextView.setText(item.getAddress());
+
+        holder.toolbar.getMenu().clear();
         holder.toolbar.inflateMenu(R.menu.card_toolbar_menu);
     }
 
@@ -57,6 +63,18 @@ public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdap
     class OrganizationViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.organization_name)
         TextView organizationNameTextView;
+
+        @BindView(R.id.organization_region)
+        TextView organizationRegionTextView;
+
+        @BindView(R.id.organization_city)
+        TextView organizationCityTextView;
+
+        @BindView(R.id.organization_phone)
+        TextView organizationPhoneTextView;
+
+        @BindView(R.id.organization_location)
+        TextView organizationLocationTextView;
 
         @BindView(R.id.card_toolbar)
         Toolbar toolbar;
