@@ -2,12 +2,13 @@ package com.genius.wasylews.domain.repository;
 
 import com.genius.wasylews.domain.model.Organization;
 
-import io.reactivex.Flowable;
+import java.util.List;
+
 import io.reactivex.Single;
 
 public interface Repository {
 
-    Flowable<Organization> getOrganizations();
+    Single<List<Organization>> getOrganizations();
 
-    Single<Organization> getOrganization(int id);
+    Organization getOrganization(int id);
 }
