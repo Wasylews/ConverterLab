@@ -20,6 +20,8 @@
         android:gravity="center_vertical"
         android:background="@color/colorPrimary"
         android:textColor="@android:color/white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="Updating..."
         android:visibility="gone" />
 
