@@ -1,17 +1,21 @@
 package com.genius.wasylews.converterlab.presenter;
 
 
+import android.util.Log;
+
 import com.genius.wasylews.converterlab.di.scope.PerActivity;
 import com.genius.wasylews.converterlab.view.BaseHomeView;
-import com.genius.wasylews.domain.model.Organization;
 import com.genius.wasylews.domain.usecase.GetOrganizationList;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 @PerActivity
 public class HomePresenter {
+
+    private static final String TAG = HomePresenter.class.getSimpleName();
 
     private final GetOrganizationList mGetOrganizationList;
     private BaseHomeView mView;
@@ -30,8 +34,13 @@ public class HomePresenter {
     }
 
     public void loadList() {
-        List<Organization> list = mGetOrganizationList.execute();
+        mView.showProgress();
 
-        mView.showOrganizations(list);
+        mGetOrganizationList.execute()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally(mView::hideProgress)
+                .subscribe(mView::showOrganizations,
+                        throwable -> Log.d(TAG, "Error on subscribe", throwable));
     }
 }
