@@ -6,11 +6,18 @@
     android:layout_height="match_parent"
     tools:context="com.genius.wasylews.converterlab.view.activity.HomeActivity">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="100">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/home_activity_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="100"/>
+        android:layout_height="match_parent" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <TextView android:id="@+id/progress_text_view"
         android:layout_width="match_parent"

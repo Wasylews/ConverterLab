@@ -1,6 +1,7 @@
 package com.genius.wasylews.converterlab.view.activity;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,6 +37,9 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView {
     @BindView(R.id.progress_text_view)
     TextView mProgressTextView;
 
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
@@ -47,6 +51,8 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(adapter);
+
+        mSwipeRefreshLayout.setOnRefreshListener(presenter::loadList);
 
         presenter.setView(this);
         presenter.loadList();
@@ -75,5 +81,6 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView {
     @Override
     public void hideProgress() {
         mProgressTextView.setVisibility(View.GONE);
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 }
