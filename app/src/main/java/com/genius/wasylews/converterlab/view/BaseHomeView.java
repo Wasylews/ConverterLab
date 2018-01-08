@@ -14,4 +14,6 @@ public interface BaseHomeView {
     void showProgress();
 
     void hideProgress();
+
+    void openSite(String link);
 }

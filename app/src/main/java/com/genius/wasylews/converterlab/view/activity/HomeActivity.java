@@ -1,11 +1,14 @@
 package com.genius.wasylews.converterlab.view.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
 
-public class HomeActivity extends AppCompatActivity implements BaseHomeView {
+public class HomeActivity extends AppCompatActivity implements BaseHomeView, OrganizationsAdapter.CardToolbarItemClickedListener {
 
     @Inject
     HomePresenter presenter;
@@ -51,6 +54,8 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(adapter);
+
+        adapter.setMenuItemClickedListener(this);
 
         mSwipeRefreshLayout.setOnRefreshListener(presenter::loadList);
 
@@ -82,5 +87,23 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView {
     public void hideProgress() {
         mProgressTextView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void openSite(String link) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+        startActivity(browserIntent);
+    }
+
+    @Override
+    public boolean onItemClicked(MenuItem item, Organization organization) {
+        switch (item.getItemId()) {
+            case R.id.toolbar_link:
+                presenter.openOrganizationSite(organization);
+                break;
+            default:
+                return false;
+        }
+        return true;
     }
 }

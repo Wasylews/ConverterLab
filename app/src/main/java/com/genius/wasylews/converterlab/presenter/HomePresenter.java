@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.genius.wasylews.converterlab.di.scope.PerActivity;
 import com.genius.wasylews.converterlab.view.BaseHomeView;
+import com.genius.wasylews.domain.model.Organization;
 import com.genius.wasylews.domain.usecase.GetOrganizationList;
 
 import javax.inject.Inject;
@@ -42,5 +43,9 @@ public class HomePresenter {
                 .doFinally(mView::hideProgress)
                 .subscribe(mView::showOrganizations,
                         throwable -> Log.d(TAG, "Error on subscribe", throwable));
+    }
+
+    public void openOrganizationSite(Organization organization) {
+        mView.openSite(organization.getLink());
     }
 }

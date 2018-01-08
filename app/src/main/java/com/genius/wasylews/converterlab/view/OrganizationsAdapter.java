@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -21,8 +22,13 @@ import butterknife.ButterKnife;
 
 public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdapter.OrganizationViewHolder> {
 
+    public interface CardToolbarItemClickedListener {
+        boolean onItemClicked(MenuItem item, Organization organization);
+    }
+
     private final LayoutInflater mInflater;
     private List<Organization> mOrganizations;
+    private CardToolbarItemClickedListener mMenuItemClickedListener;
 
     @Inject
     public OrganizationsAdapter(Context context) {
@@ -38,7 +44,7 @@ public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdap
 
     @Override
     public void onBindViewHolder(OrganizationViewHolder holder, int position) {
-        Organization item = mOrganizations.get(position);
+        final Organization item = mOrganizations.get(position);
 
         holder.organizationNameTextView.setText(item.getTitle());
         holder.organizationRegionTextView.setText(item.getRegion());
@@ -48,6 +54,7 @@ public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdap
 
         holder.toolbar.getMenu().clear();
         holder.toolbar.inflateMenu(R.menu.card_toolbar_menu);
+        holder.toolbar.setOnMenuItemClickListener(menuItem -> mMenuItemClickedListener.onItemClicked(menuItem, item));
     }
 
     @Override
@@ -58,6 +65,10 @@ public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdap
     public void setOrganizations(List<Organization> organizations) {
         mOrganizations = organizations;
         notifyDataSetChanged();
+    }
+
+    public void setMenuItemClickedListener(CardToolbarItemClickedListener menuItemClickedListener) {
+        mMenuItemClickedListener = menuItemClickedListener;
     }
 
     class OrganizationViewHolder extends RecyclerView.ViewHolder {
