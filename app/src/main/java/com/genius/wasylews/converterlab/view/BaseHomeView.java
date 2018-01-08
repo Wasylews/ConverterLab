@@ -16,4 +16,6 @@ public interface BaseHomeView {
     void hideProgress();
 
     void openSite(String link);
+
+    void makePhoneCall(String phone);
 }

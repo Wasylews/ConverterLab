@@ -90,20 +90,29 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView, Org
     }
 
     @Override
+    public boolean onItemClicked(MenuItem item, Organization organization) {
+        switch (item.getItemId()) {
+            case R.id.toolbar_link:
+                presenter.openOrganizationSite(organization);
+                break;
+            case R.id.toolbar_phone:
+                presenter.callOrganization(organization);
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
+
+    @Override
     public void openSite(String link) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
         startActivity(browserIntent);
     }
 
     @Override
-    public boolean onItemClicked(MenuItem item, Organization organization) {
-        switch (item.getItemId()) {
-            case R.id.toolbar_link:
-                presenter.openOrganizationSite(organization);
-                break;
-            default:
-                return false;
-        }
-        return true;
+    public void makePhoneCall(String phone) {
+        Intent phoneDialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
+        startActivity(phoneDialIntent);
     }
 }

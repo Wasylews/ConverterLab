@@ -48,4 +48,8 @@ public class HomePresenter {
     public void openOrganizationSite(Organization organization) {
         mView.openSite(organization.getLink());
     }
+
+    public void callOrganization(Organization organization) {
+        mView.makePhoneCall(organization.getPhone());
+    }
 }
