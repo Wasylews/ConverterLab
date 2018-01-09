@@ -10,5 +10,5 @@ public interface Repository {
 
     Single<List<Organization>> getOrganizations();
 
-    Organization getOrganization(int id);
+    Single<Organization> getOrganization(String id);
 }

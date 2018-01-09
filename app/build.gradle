@@ -71,4 +71,10 @@ dependencies {
 
     // dbflow
     implementation 'com.github.Raizlabs.DBFlow:dbflow:4.2.3'
+
+    // google maps
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
+
+    // google places
+    implementation 'com.google.android.gms:play-services-places:11.8.0'
 }
