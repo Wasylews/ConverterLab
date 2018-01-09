@@ -7,6 +7,12 @@ import android.content.SharedPreferences;
 import com.genius.wasylews.converterlab.App;
 import com.genius.wasylews.converterlab.di.scope.PerActivity;
 import com.genius.wasylews.converterlab.view.activity.HomeActivity;
+import com.genius.wasylews.device.location.LocationProvider;
+import com.genius.wasylews.domain.location.LocationManager;
+import com.google.android.gms.location.places.GeoDataClient;
+import com.google.android.gms.location.places.Places;
+
+import javax.inject.Singleton;
 
 import dagger.Binds;
 import dagger.Module;
@@ -31,5 +37,14 @@ public abstract class AppModule {
     @Provides
     static SharedPreferences provideSharedPreferences(Application context) {
         return context.getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE);
+    }
+
+    @Binds
+    abstract LocationManager provideLocationManager(LocationProvider provider);
+
+    @Singleton
+    @Provides
+    static GeoDataClient provideGeoDataClient(Context context) {
+        return Places.getGeoDataClient(context, null);
     }
 }
