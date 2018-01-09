@@ -12,7 +12,7 @@ import java.util.List;
 public class OrganizationMapper {
 
     public static Organization transform(OrganizationModel model) {
-        Organization organization = new Organization();
+        Organization organization = new Organization(model.getId());
 
         organization.setTitle(model.getTitle());
         organization.setAddress(model.getAddress());

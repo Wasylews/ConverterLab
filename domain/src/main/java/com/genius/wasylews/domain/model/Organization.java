@@ -3,6 +3,8 @@ package com.genius.wasylews.domain.model;
 import java.util.List;
 
 public class Organization {
+
+    private String mId;
     private String mTitle;
     private String mRegion;
     private String mCity;
@@ -10,6 +12,14 @@ public class Organization {
     private String mAddress;
     private String mLink;
     private List<Currency> mCurrencies;
+
+    public Organization(String id) {
+        mId = id;
+    }
+
+    public String getId() {
+        return mId;
+    }
 
     public String getTitle() {
         return mTitle;
