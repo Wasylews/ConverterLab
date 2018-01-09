@@ -95,6 +95,9 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView, Org
             case R.id.toolbar_link:
                 presenter.openOrganizationSite(organization);
                 break;
+            case R.id.toolbar_map:
+                presenter.showOnMap(organization);
+                break;
             case R.id.toolbar_phone:
                 presenter.callOrganization(organization);
                 break;
@@ -114,5 +117,11 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView, Org
     public void makePhoneCall(String phone) {
         Intent phoneDialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
         startActivity(phoneDialIntent);
+    }
+
+    @Override
+    public void openMap(Organization organization) {
+        Intent mapIntent = MapActivity.newIntent(this, organization);
+        startActivity(mapIntent);
     }
 }

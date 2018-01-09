@@ -18,4 +18,6 @@ public interface BaseHomeView {
     void openSite(String link);
 
     void makePhoneCall(String phone);
+
+    void openMap(Organization organization);
 }

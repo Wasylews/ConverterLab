@@ -52,4 +52,8 @@ public class HomePresenter {
     public void callOrganization(Organization organization) {
         mView.makePhoneCall(organization.getPhone());
     }
+
+    public void showOnMap(Organization organization) {
+        mView.openMap(organization);
+    }
 }
