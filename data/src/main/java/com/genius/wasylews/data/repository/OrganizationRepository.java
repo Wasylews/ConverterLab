@@ -3,6 +3,7 @@ package com.genius.wasylews.data.repository;
 import android.util.Log;
 
 import com.genius.wasylews.data.database.model.OrganizationModel;
+import com.genius.wasylews.data.database.model.OrganizationModel_Table;
 import com.genius.wasylews.data.database.model.mapper.OrganizationCurrencyModelMapper;
 import com.genius.wasylews.data.database.model.mapper.OrganizationMapper;
 import com.genius.wasylews.data.net.RestService;
@@ -74,7 +75,11 @@ public class OrganizationRepository implements Repository {
     }
 
     @Override
-    public Organization getOrganization(int id) {
-        return null;
+    public Single<Organization> getOrganization(String id) {
+        return RXSQLite.rx(SQLite.select().from(OrganizationModel.class)
+                .where(OrganizationModel_Table.id.eq(id)))
+                .querySingle()
+                .toSingle()
+                .map(OrganizationMapper::transform);
     }
 }
