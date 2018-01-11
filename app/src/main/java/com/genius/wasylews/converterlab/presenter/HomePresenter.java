@@ -56,4 +56,8 @@ public class HomePresenter {
     public void showOnMap(Organization organization) {
         mView.openMap(organization);
     }
+
+    public void showDetails(Organization organization) {
+        mView.showOrganizationDetails(organization);
+    }
 }

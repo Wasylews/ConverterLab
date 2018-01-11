@@ -75,10 +75,6 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView, Org
     }
 
     @Override
-    public void showOrganizationDetails(Organization organization) {
-    }
-
-    @Override
     public void showProgress() {
         mProgressTextView.setVisibility(View.VISIBLE);
     }
@@ -100,6 +96,9 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView, Org
                 break;
             case R.id.toolbar_phone:
                 presenter.callOrganization(organization);
+                break;
+            case R.id.toolbar_details:
+                presenter.showDetails(organization);
                 break;
             default:
                 return false;
@@ -123,5 +122,11 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView, Org
     public void openMap(Organization organization) {
         Intent mapIntent = MapActivity.newIntent(this, organization);
         startActivity(mapIntent);
+    }
+
+    @Override
+    public void showOrganizationDetails(Organization organization) {
+        Intent detailsIntent = DetailsActivity.newIntent(this, organization);
+        startActivity(detailsIntent);
     }
 }
