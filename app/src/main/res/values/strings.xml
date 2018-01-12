@@ -5,4 +5,6 @@
     <string name="map_title">Показать на карте</string>
     <string name="phone_title">Позвонить</string>
     <string name="details_title">Подробнее</string>
+    <string name="address_title">Адрес :</string>
+    <string name="phone_help_text_title">Тел.:</string>
 </resources>

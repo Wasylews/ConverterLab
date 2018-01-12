@@ -1,49 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="10dp"
+    app:cardMaxElevation="0dp"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="0dp">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView android:id="@+id/organization_name"
-            tools:text="Organization name"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/organization_name"
+            style="@style/TextViewStyle.Title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="@android:color/black"/>
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Organization" />
 
-        <TextView android:id="@+id/organization_region"
-            tools:text="Organization region"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/organization_region"
+            style="@style/TextViewStyle.Body"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/organization_name"
+            tools:text="Region" />
 
-        <TextView android:id="@+id/organization_city"
-            tools:text="Organization city"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/organization_city"
+            style="@style/TextViewStyle.Body"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/organization_region"
+            tools:text="City" />
 
-        <TextView android:id="@+id/organization_phone"
-            tools:text="Tel: 000 00 000 00"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/phone_help_text"
+            style="@style/TextViewStyle.Footer"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end" />
+            android:text="@string/phone_help_text_title"
+            app:layout_constraintTop_toTopOf="@id/organization_phone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/organization_phone"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_bias="100"
+            />
 
-        <TextView android:id="@+id/organization_location"
-            tools:text="Address: Random st. 20"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/organization_phone"
+            style="@style/TextViewStyle.Footer"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end" />
+            tools:text="000 00 000 00"
+            app:layout_constraintTop_toBottomOf="@id/organization_city"
+            app:layout_constraintStart_toEndOf="@id/phone_help_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
 
-        <android.support.v7.widget.Toolbar android:id="@+id/card_toolbar"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/location_help_text"
+            style="@style/TextViewStyle.Footer"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorToolBarItem"/>
+            android:text="@string/address_title"
+            app:layout_constraintTop_toTopOf="@id/organization_location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/organization_location"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintHorizontal_bias="100"
+            />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/organization_location"
+            style="@style/TextViewStyle.Footer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constrainedWidth="true"
+            tools:text="Long street name that require two lines or even more"
+            app:layout_constraintTop_toBottomOf="@id/organization_phone"
+            app:layout_constraintStart_toEndOf="@id/location_help_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/card_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorToolBarItem"
+            android:minHeight="?attr/actionBarSize"
+            app:contentInsetEnd="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/organization_location" />
+
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
