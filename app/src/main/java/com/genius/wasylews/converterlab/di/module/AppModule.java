@@ -1,6 +1,5 @@
 package com.genius.wasylews.converterlab.di.module;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -23,17 +22,16 @@ import dagger.android.ContributesAndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 
 @Module(includes = {AndroidSupportInjectionModule.class,
-        HomeActivityModule.class,
         RepositoryModule.class})
 public abstract class AppModule {
 
     private static final String SETTINGS_FILE = "settings";
 
     @Binds
-    abstract Application application(App app);
+    abstract Context provideApplicationContext(App app);
 
     @Provides
-    static SharedPreferences provideSharedPreferences(Application context) {
+    static SharedPreferences provideSharedPreferences(Context context) {
         return context.getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE);
     }
 
@@ -47,7 +45,7 @@ public abstract class AppModule {
     }
 
     @PerActivity
-    @ContributesAndroidInjector(modules = HomeActivityModule.class)
+    @ContributesAndroidInjector
     abstract HomeActivity homeActivityInjector();
 
     @PerActivity
