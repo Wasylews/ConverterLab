@@ -5,12 +5,15 @@ import com.genius.wasylews.converterlab.di.scope.PerActivity;
 import com.genius.wasylews.converterlab.view.BaseMapView;
 import com.genius.wasylews.domain.usecase.GetOrganizationLocation;
 
+import javax.inject.Inject;
+
 @PerActivity
 public class MapPresenter {
 
     private GetOrganizationLocation mGetOrganizationLocation;
     private BaseMapView mView;
 
+    @Inject
     public MapPresenter(GetOrganizationLocation getOrganizationLocation) {
         mGetOrganizationLocation = getOrganizationLocation;
     }
