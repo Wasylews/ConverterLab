@@ -6,7 +6,9 @@ import android.content.SharedPreferences;
 
 import com.genius.wasylews.converterlab.App;
 import com.genius.wasylews.converterlab.di.scope.PerActivity;
+import com.genius.wasylews.converterlab.view.activity.DetailsActivity;
 import com.genius.wasylews.converterlab.view.activity.HomeActivity;
+import com.genius.wasylews.converterlab.view.activity.MapActivity;
 import com.genius.wasylews.device.location.LocationProvider;
 import com.genius.wasylews.domain.location.LocationManager;
 import com.google.android.gms.location.places.GeoDataClient;
@@ -27,10 +29,6 @@ public abstract class AppModule {
 
     private static final String SETTINGS_FILE = "settings";
 
-    @PerActivity
-    @ContributesAndroidInjector(modules = HomeActivityModule.class)
-    abstract HomeActivity homeActivityInjector();
-
     @Binds
     abstract Application application(App app);
 
@@ -47,4 +45,16 @@ public abstract class AppModule {
     static GeoDataClient provideGeoDataClient(Context context) {
         return Places.getGeoDataClient(context, null);
     }
+
+    @PerActivity
+    @ContributesAndroidInjector(modules = HomeActivityModule.class)
+    abstract HomeActivity homeActivityInjector();
+
+    @PerActivity
+    @ContributesAndroidInjector
+    abstract MapActivity mapActivityInjector();
+
+    @PerActivity
+    @ContributesAndroidInjector
+    abstract DetailsActivity detailsActivityInjector();
 }

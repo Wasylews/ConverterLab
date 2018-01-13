@@ -19,6 +19,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import javax.inject.Inject;
 
+import dagger.android.AndroidInjection;
+
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback, BaseMapView {
 
     @Inject
@@ -36,6 +38,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 

@@ -8,12 +8,15 @@ import android.os.Bundle;
 import com.genius.wasylews.converterlab.R;
 import com.genius.wasylews.domain.model.Organization;
 
+import dagger.android.AndroidInjection;
+
 public class DetailsActivity extends AppCompatActivity {
 
     private static final String EXTRA_ORGANIZATION_ID = "ORGANIZATION_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
     }
