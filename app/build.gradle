@@ -17,6 +17,7 @@ android {
         }
         all {
             buildConfigField "String", "END_POINT", '"http://resources.finance.ua/ru/public/"'
+            buildConfigField "String", "SETTINGS_FILE", '"settings"'
         }
     }
     compileOptions {

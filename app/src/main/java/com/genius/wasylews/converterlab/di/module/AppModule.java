@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.genius.wasylews.converterlab.App;
+import com.genius.wasylews.converterlab.BuildConfig;
 import com.genius.wasylews.converterlab.di.scope.PerActivity;
 import com.genius.wasylews.converterlab.view.activity.DetailsActivity;
 import com.genius.wasylews.converterlab.view.activity.HomeActivity;
@@ -25,14 +26,12 @@ import dagger.android.support.AndroidSupportInjectionModule;
         RepositoryModule.class})
 public abstract class AppModule {
 
-    private static final String SETTINGS_FILE = "settings";
-
     @Binds
     abstract Context provideApplicationContext(App app);
 
     @Provides
     static SharedPreferences provideSharedPreferences(Context context) {
-        return context.getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE);
+        return context.getSharedPreferences(BuildConfig.SETTINGS_FILE, Context.MODE_PRIVATE);
     }
 
     @Binds
