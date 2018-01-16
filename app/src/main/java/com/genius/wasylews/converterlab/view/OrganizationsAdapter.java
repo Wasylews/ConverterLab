@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.genius.wasylews.converterlab.R;
+import com.genius.wasylews.device.number.NumberFormatter;
 import com.genius.wasylews.domain.model.Organization;
 
 import java.util.Collections;
@@ -49,7 +50,10 @@ public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdap
         holder.organizationNameTextView.setText(item.getTitle());
         holder.organizationRegionTextView.setText(item.getRegion());
         holder.organizationCityTextView.setText(item.getCity());
-        holder.organizationPhoneTextView.setText(item.getPhone());
+
+        String phoneNumber = NumberFormatter.format(item.getPhone());
+        holder.organizationPhoneTextView.setText(phoneNumber);
+
         holder.organizationLocationTextView.setText(item.getAddress());
 
         holder.toolbar.getMenu().clear();
