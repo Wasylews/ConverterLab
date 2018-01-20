@@ -9,6 +9,7 @@ import com.genius.wasylews.data.database.model.mapper.OrganizationMapper;
 import com.genius.wasylews.data.net.RestService;
 import com.genius.wasylews.device.preferences.PreferencesManager;
 import com.genius.wasylews.domain.model.Organization;
+import com.genius.wasylews.domain.network.NetworkManager;
 import com.genius.wasylews.domain.repository.Repository;
 import com.raizlabs.android.dbflow.rx2.language.RXSQLite;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -30,14 +31,19 @@ public class OrganizationRepository implements Repository {
 
     private final PreferencesManager mPreferencesManager;
 
+    private final NetworkManager mConnectionManager;
+
     private static final String LAST_DATE_KEY = "LAST_UPDATE_DATE_KEY";
 
     private static final String TAG = OrganizationRepository.class.getSimpleName();
 
     @Inject
-    public OrganizationRepository(RestService adapter, PreferencesManager manager) {
+    public OrganizationRepository(RestService adapter,
+                                  PreferencesManager preferencesManager,
+                                  NetworkManager connectionManager) {
         mRestAdapter = adapter;
-        mPreferencesManager = manager;
+        mPreferencesManager = preferencesManager;
+        mConnectionManager = connectionManager;
     }
 
     @Override
@@ -52,6 +58,10 @@ public class OrganizationRepository implements Repository {
     }
 
     private void fetchOrganizations(Disposable disposable) {
+        if (!mConnectionManager.isConnected()) {
+            return;
+        }
+
         Log.d(TAG, "Fetching from service");
         mRestAdapter.getOrganizations()
                 .filter(serviceResponse -> {

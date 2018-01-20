@@ -22,8 +22,8 @@ import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 
-@Module(includes = {AndroidSupportInjectionModule.class,
-        RepositoryModule.class})
+@Module(includes = { AndroidSupportInjectionModule.class,
+        RepositoryModule.class, NetworkModule.class })
 public abstract class AppModule {
 
     @Binds
