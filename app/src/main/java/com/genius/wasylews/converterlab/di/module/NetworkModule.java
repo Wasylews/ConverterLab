@@ -11,7 +11,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public abstract class NetworkModule {
+public interface NetworkModule {
 
     @Provides
     static ConnectivityManager provideConnectivityManager(Context context) {
@@ -19,5 +19,5 @@ public abstract class NetworkModule {
     }
 
     @Binds
-    abstract NetworkManager provideNetworkManager(NetworkUtils manager);
+    NetworkManager provideNetworkManager(NetworkUtils manager);
 }
