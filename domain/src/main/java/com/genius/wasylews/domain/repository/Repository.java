@@ -11,4 +11,6 @@ public interface Repository {
     Single<List<Organization>> getOrganizations();
 
     Single<Organization> getOrganization(String id);
+
+    void fetchOrganizations();
 }

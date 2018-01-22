@@ -50,14 +50,14 @@ public class OrganizationRepository implements Repository {
     public Single<List<Organization>> getOrganizations() {
         return RXSQLite.rx(SQLite.select().from(OrganizationModel.class))
                 .queryList()
-                .doOnSubscribe(this::fetchOrganizations)
+                .doOnSubscribe((disposable) -> this.fetchOrganizations())
                 .toFlowable()
                 .flatMapIterable(organizationModels -> organizationModels)
                 .map(OrganizationMapper::transform)
                 .toList();
     }
 
-    private void fetchOrganizations(Disposable disposable) {
+    public void fetchOrganizations() {
         if (!mConnectionManager.isConnected()) {
             return;
         }
