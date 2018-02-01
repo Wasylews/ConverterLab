@@ -19,6 +19,12 @@ public class CurrencyQueryModel {
     @Column
     private Double bid;
 
+    @Column(getterName = "isAskUp")
+    private boolean askUp;
+
+    @Column(getterName = "isBidUp")
+    private boolean bidUp;
+
     public String getCode() {
         return code;
     }
@@ -49,5 +55,21 @@ public class CurrencyQueryModel {
 
     public void setBid(Double bid) {
         this.bid = bid;
+    }
+
+    public boolean isAskUp() {
+        return askUp;
+    }
+
+    public void setAskUp(boolean askUp) {
+        this.askUp = askUp;
+    }
+
+    public boolean isBidUp() {
+        return bidUp;
+    }
+
+    public void setBidUp(boolean bidUp) {
+        this.bidUp = bidUp;
     }
 }

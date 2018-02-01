@@ -2,6 +2,7 @@ package com.genius.wasylews.data.repository;
 
 import android.util.Log;
 
+import com.genius.wasylews.data.database.model.OrganizationCurrencyModel;
 import com.genius.wasylews.data.database.model.OrganizationModel;
 import com.genius.wasylews.data.database.model.OrganizationModel_Table;
 import com.genius.wasylews.data.database.model.mapper.OrganizationCurrencyModelMapper;
@@ -13,7 +14,6 @@ import com.genius.wasylews.domain.network.NetworkManager;
 import com.genius.wasylews.domain.repository.Repository;
 import com.raizlabs.android.dbflow.rx2.language.RXSQLite;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
-import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.util.Date;
 import java.util.List;
@@ -81,7 +81,7 @@ public class OrganizationRepository implements Repository {
                 .toFlowable()
                 .flatMapIterable(organizationCurrencyModels -> organizationCurrencyModels)
                 .observeOn(Schedulers.io())
-                .subscribe(BaseModel::save);
+                .subscribe(OrganizationCurrencyModel::save);
     }
 
     @Override
