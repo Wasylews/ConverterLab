@@ -1,12 +1,13 @@
 package com.genius.wasylews.converterlab.view;
 
 import android.content.Context;
+import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.genius.wasylews.converterlab.R;
@@ -24,7 +25,7 @@ import butterknife.ButterKnife;
 public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdapter.OrganizationViewHolder> {
 
     public interface CardToolbarItemClickedListener {
-        boolean onItemClicked(MenuItem item, Organization organization);
+        boolean onItemClicked(@IdRes int buttonId, Organization organization);
     }
 
     private final LayoutInflater mInflater;
@@ -56,9 +57,11 @@ public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdap
 
         holder.organizationLocationTextView.setText(item.getAddress());
 
-        holder.toolbar.getMenu().clear();
-        holder.toolbar.inflateMenu(R.menu.card_toolbar_menu);
-        holder.toolbar.setOnMenuItemClickListener(menuItem -> mMenuItemClickedListener.onItemClicked(menuItem, item));
+        final View.OnClickListener clickListener = view -> mMenuItemClickedListener.onItemClicked(view.getId(), item);
+        holder.cardToolbarLinkButton.setOnClickListener(clickListener);
+        holder.cardToolbarMapButton.setOnClickListener(clickListener);
+        holder.cardToolbarPhoneButton.setOnClickListener(clickListener);
+        holder.cardToolbarDetailsButton.setOnClickListener(clickListener);
     }
 
     @Override
@@ -91,8 +94,17 @@ public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdap
         @BindView(R.id.organization_location)
         TextView organizationLocationTextView;
 
-        @BindView(R.id.card_toolbar)
-        Toolbar toolbar;
+        @BindView(R.id.card_toolbar_link)
+        ImageButton cardToolbarLinkButton;
+
+        @BindView(R.id.card_toolbar_map)
+        ImageButton cardToolbarMapButton;
+
+        @BindView(R.id.card_toolbar_phone)
+        ImageButton cardToolbarPhoneButton;
+
+        @BindView(R.id.card_toolbar_details)
+        ImageButton cardToolbarDetailsButton;
 
         OrganizationViewHolder(View itemView) {
             super(itemView);

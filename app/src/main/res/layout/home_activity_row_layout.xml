@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="10dp"
-    app:cardMaxElevation="0dp"
+    app:cardElevation="8dp"
     app:cardUseCompatPadding="true"
-    app:contentPadding="0dp">
+    app:cardBackgroundColor="@color/cardview_light_background">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -50,23 +49,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/phone_help_text_title"
-            app:layout_constraintTop_toTopOf="@id/organization_phone"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/organization_phone"
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintHorizontal_bias="100"
-            />
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/organization_phone" />
 
         <TextView
             android:id="@+id/organization_phone"
             style="@style/TextViewStyle.Footer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="000 00 000 00"
-            app:layout_constraintTop_toBottomOf="@id/organization_city"
-            app:layout_constraintStart_toEndOf="@id/phone_help_text"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintStart_toEndOf="@id/phone_help_text"
+            app:layout_constraintTop_toBottomOf="@id/organization_city"
+            tools:text="000 00 000 00" />
 
         <TextView
             android:id="@+id/location_help_text"
@@ -74,12 +71,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/address_title"
-            app:layout_constraintTop_toTopOf="@id/organization_location"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/organization_location"
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintHorizontal_bias="100"
-            />
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/organization_location" />
 
         <TextView
             android:id="@+id/organization_location"
@@ -87,22 +83,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constrainedWidth="true"
-            tools:text="Long street name that require two lines or even more"
-            app:layout_constraintTop_toBottomOf="@id/organization_phone"
-            app:layout_constraintStart_toEndOf="@id/location_help_text"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/location_help_text"
+            app:layout_constraintTop_toBottomOf="@+id/phone_help_text"
+            tools:text="Long street name that require two lines or even more" />
 
-        <android.support.v7.widget.Toolbar
+        <include
             android:id="@+id/card_toolbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:minHeight="?android:attr/actionBarSize"
-            android:layout_marginTop="16dp"
-            android:background="@color/colorToolBarItem"
-            android:theme="@style/AppTheme"
-            app:contentInsetEnd="0dp"
-            app:contentInsetStart="0dp"
+            layout="@layout/home_activity_row_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/organization_location" />
