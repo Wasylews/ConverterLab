@@ -3,6 +3,7 @@ package com.genius.wasylews.converterlab.view.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -86,18 +87,18 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView, Org
     }
 
     @Override
-    public boolean onItemClicked(MenuItem item, Organization organization) {
-        switch (item.getItemId()) {
-            case R.id.toolbar_link:
+    public boolean onItemClicked(@IdRes int buttonId, Organization organization) {
+        switch (buttonId) {
+            case R.id.card_toolbar_link:
                 presenter.openOrganizationSite(organization);
                 break;
-            case R.id.toolbar_map:
+            case R.id.card_toolbar_map:
                 presenter.showOnMap(organization);
                 break;
-            case R.id.toolbar_phone:
+            case R.id.card_toolbar_phone:
                 presenter.callOrganization(organization);
                 break;
-            case R.id.toolbar_details:
+            case R.id.card_toolbar_details:
                 presenter.showDetails(organization);
                 break;
             default:
