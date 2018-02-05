@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -52,8 +51,8 @@ public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdap
         holder.organizationRegionTextView.setText(item.getRegion());
         holder.organizationCityTextView.setText(item.getCity());
 
-        String phoneNumber = NumberFormatter.format(item.getPhone());
-        holder.organizationPhoneTextView.setText(phoneNumber);
+        String phone = NumberFormatter.format("xxx xx xxx xx", item.getPhone());
+        holder.organizationPhoneTextView.setText(phone);
 
         holder.organizationLocationTextView.setText(item.getAddress());
 
