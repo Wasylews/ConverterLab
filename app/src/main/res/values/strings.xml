@@ -5,7 +5,13 @@
     <string name="map_title">Показать на карте</string>
     <string name="phone_title">Позвонить</string>
     <string name="details_title">Подробнее</string>
-    <string name="address_title">Адрес :</string>
+    <string name="address_title">Адрес:</string>
     <string name="phone_help_text_title">Тел.:</string>
-    <string name="update_title">Updating...</string>
+    <string name="update_title">Updating…</string>
+    <string name="share_title">Поделиться</string>
+    <string name="details_phone_help_text_title">Телефон:</string>
+    <string name="details_currency_name_help_text">Название валюты</string>
+    <string name="details_currency_ask_bid_help_text">Покупка /\n Продажа</string>
+    <string name="fab_menu_map_title">Карта</string>
+    <string name="fab_menu_link_title">Сайт</string>
 </resources>

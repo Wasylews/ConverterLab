@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.genius.wasylews.converterlab"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -78,4 +78,7 @@ dependencies {
 
     // google places
     implementation 'com.google.android.gms:play-services-places:11.8.0'
+
+    // fab menu
+    implementation 'me.jahirfiquitiva:FABsMenu:1.1.1'
 }
