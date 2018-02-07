@@ -5,11 +5,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -25,9 +23,9 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
+import dagger.android.support.DaggerAppCompatActivity;
 
-public class HomeActivity extends AppCompatActivity implements BaseHomeView, OrganizationsAdapter.CardToolbarItemClickedListener {
+public class HomeActivity extends DaggerAppCompatActivity implements BaseHomeView, OrganizationsAdapter.CardToolbarItemClickedListener {
 
     @Inject
     HomePresenter presenter;
@@ -46,8 +44,6 @@ public class HomeActivity extends AppCompatActivity implements BaseHomeView, Org
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 

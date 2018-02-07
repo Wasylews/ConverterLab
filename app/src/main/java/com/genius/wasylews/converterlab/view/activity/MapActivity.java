@@ -3,7 +3,6 @@ package com.genius.wasylews.converterlab.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
 import com.genius.wasylews.converterlab.R;
 import com.genius.wasylews.converterlab.presenter.MapPresenter;
@@ -19,9 +18,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
+import dagger.android.support.DaggerAppCompatActivity;
 
-public class MapActivity extends FragmentActivity implements OnMapReadyCallback, BaseMapView {
+public class MapActivity extends DaggerAppCompatActivity implements OnMapReadyCallback, BaseMapView {
 
     @Inject
     MapPresenter presenter;
@@ -38,7 +37,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
