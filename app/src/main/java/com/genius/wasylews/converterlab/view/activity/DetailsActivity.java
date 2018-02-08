@@ -1,10 +1,10 @@
 package com.genius.wasylews.converterlab.view.activity;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -150,7 +150,7 @@ public class DetailsActivity extends DaggerAppCompatActivity implements BaseDeta
     }
 
     private void openShareDialog() {
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
         ShareDialogFragment dialog = ShareDialogFragment.newInstance(mOrganization);
         dialog.show(fragmentManager, ShareDialogFragment.TAG);
