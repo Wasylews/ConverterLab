@@ -14,4 +14,5 @@
     <string name="details_currency_ask_bid_help_text">Покупка /\n Продажа</string>
     <string name="fab_menu_map_title">Карта</string>
     <string name="fab_menu_link_title">Сайт</string>
+    <string name="share_dialog_button_title">Share</string>
 </resources>

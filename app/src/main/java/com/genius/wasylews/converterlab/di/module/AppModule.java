@@ -6,10 +6,14 @@ import android.content.SharedPreferences;
 import com.genius.wasylews.converterlab.App;
 import com.genius.wasylews.converterlab.BuildConfig;
 import com.genius.wasylews.converterlab.di.scope.PerActivity;
+import com.genius.wasylews.converterlab.di.scope.PerFragment;
 import com.genius.wasylews.converterlab.view.activity.DetailsActivity;
 import com.genius.wasylews.converterlab.view.activity.HomeActivity;
 import com.genius.wasylews.converterlab.view.activity.MapActivity;
+import com.genius.wasylews.converterlab.view.fragment.ShareDialogFragment;
+import com.genius.wasylews.device.bitmap.BitmapProviderUtil;
 import com.genius.wasylews.device.location.LocationProvider;
+import com.genius.wasylews.domain.bitmap.BitmapProvider;
 import com.genius.wasylews.domain.location.LocationManager;
 import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.Places;
@@ -43,6 +47,10 @@ public abstract class AppModule {
         return Places.getGeoDataClient(context, null);
     }
 
+    @Singleton
+    @Binds
+    abstract BitmapProvider provideBitmapUtil(BitmapProviderUtil providerUtil);
+
     @PerActivity
     @ContributesAndroidInjector
     abstract HomeActivity homeActivityInjector();
@@ -54,4 +62,8 @@ public abstract class AppModule {
     @PerActivity
     @ContributesAndroidInjector
     abstract DetailsActivity detailsActivityInjector();
+
+    @PerFragment
+    @ContributesAndroidInjector
+    abstract ShareDialogFragment shareDialogFragmentInjector();
 }
