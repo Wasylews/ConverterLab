@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.genius.wasylews.converterlab.BuildConfig;
+import com.genius.wasylews.device.bitmap.BitmapProviderUtil;
 import com.genius.wasylews.device.location.LocationProvider;
+import com.genius.wasylews.domain.bitmap.BitmapProvider;
 import com.genius.wasylews.domain.location.LocationManager;
 import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.Places;
@@ -37,4 +39,8 @@ public interface DeviceUtilsModule {
     static AlarmManager provideAlarmManager(Context context) {
         return (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
     }
+
+    @Singleton
+    @Binds
+    abstract BitmapProvider provideBitmapUtil(BitmapProviderUtil providerUtil);
 }

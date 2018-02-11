@@ -9,10 +9,6 @@ import com.genius.wasylews.converterlab.view.activity.DetailsActivity;
 import com.genius.wasylews.converterlab.view.activity.HomeActivity;
 import com.genius.wasylews.converterlab.view.activity.MapActivity;
 import com.genius.wasylews.converterlab.view.fragment.ShareDialogFragment;
-import com.genius.wasylews.device.bitmap.BitmapProviderUtil;
-import com.genius.wasylews.domain.bitmap.BitmapProvider;
-
-import javax.inject.Singleton;
 
 import dagger.Binds;
 import dagger.Module;
@@ -25,10 +21,6 @@ public interface AppModule {
 
     @Binds
     Context provideApplicationContext(App app);
-
-    @Singleton
-    @Binds
-    abstract BitmapProvider provideBitmapUtil(BitmapProviderUtil providerUtil);
 
     @PerActivity
     @ContributesAndroidInjector
