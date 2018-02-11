@@ -99,10 +99,14 @@ public class OrganizationModel extends BaseModel {
         if (currencies == null || currencies.isEmpty()) {
             currencies = SQLite.select(CurrencyModel_Table.code,
                     CurrencyModel_Table.name,
-                    OrganizationCurrencyModel_Table.ask, OrganizationCurrencyModel_Table.bid)
+                    OrganizationCurrencyModel_Table.ask,
+                    OrganizationCurrencyModel_Table.bid,
+                    OrganizationCurrencyModel_Table.askUp,
+                    OrganizationCurrencyModel_Table.bidUp)
                     .from(OrganizationCurrencyModel.class)
                     .innerJoin(CurrencyModel.class)
-                    .on(OrganizationCurrencyModel_Table.organization_id.eq(id))
+                    .on(CurrencyModel_Table.code.eq(OrganizationCurrencyModel_Table.currency_code))
+                    .where(OrganizationCurrencyModel_Table.organization_id.eq(id))
                     .queryCustomList(CurrencyQueryModel.class);
         }
         return currencies;

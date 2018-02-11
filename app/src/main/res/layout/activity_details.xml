@@ -1,9 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.genius.wasylews.converterlab.view.activity.DetailsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="4dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/organization_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/details_organization_name"
+                    style="@style/TextViewStyle.Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="24dp"
+                    app:layout_constraintBottom_toTopOf="@id/details_organization_address"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Long name that doesn't fit into one line" />
+
+                <TextView
+                    android:id="@+id/details_organization_address_help_text"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/address_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/details_organization_address" />
+
+                <TextView
+                    android:id="@+id/details_organization_address"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/details_organization_address_help_text"
+                    app:layout_constraintTop_toBottomOf="@id/details_organization_name"
+                    tools:text="Very long street name, need few lines to fit, 20" />
+
+                <TextView
+                    android:id="@+id/details_organization_phone_help_text"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/details_phone_help_text_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/details_organization_phone" />
+
+                <TextView
+                    android:id="@+id/details_organization_phone"
+                    style="@style/TextViewStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:textStyle="bold"
+                    android:paddingBottom="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/details_organization_phone_help_text"
+                    app:layout_constraintTop_toBottomOf="@id/details_organization_address"
+                    tools:text="(0000) 00-00-00" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
+
+            <TextView
+                style="@style/TextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:text="@string/details_currency_name_help_text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_margin="16dp"
+                android:text="@string/details_currency_ask_bid_help_text" />
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/currencies_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/details_swipe_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/details_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+    <jahirfiquitiva.libs.fabsmenu.FABsMenuLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_behavior="@string/fabs_menu_layout_behavior">
+
+        <jahirfiquitiva.libs.fabsmenu.FABsMenu
+            android:id="@+id/fab_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_moreButtonBackgroundColor="@color/colorFabMenuBackground"
+            app:fab_moreButtonPlusIcon="@drawable/ic_action_menu"
+            app:fab_moreButtonRippleColor="@color/colorFabMenuToggledBackground"
+            android:layout_gravity="bottom|end"
+            app:fab_moreButtonSize="normal">
+
+            <jahirfiquitiva.libs.fabsmenu.TitleFAB
+                android:id="@+id/fab_menu_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@color/colorFabItemBackground"
+                app:fabSize="mini"
+                app:fab_title="@string/fab_menu_map_title"
+                app:fab_title_textColor="@color/colorFabItem"
+                app:rippleColor="@android:color/white"
+                app:srcCompat="@drawable/ic_action_menu_map" />
+
+            <jahirfiquitiva.libs.fabsmenu.TitleFAB
+                android:id="@+id/fab_menu_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@color/colorFabItemBackground"
+                app:fabSize="mini"
+                app:fab_title="@string/fab_menu_link_title"
+                app:fab_title_textColor="@color/colorFabItem"
+                app:rippleColor="@android:color/white"
+                app:srcCompat="@drawable/ic_action_menu_link" />
+
+            <jahirfiquitiva.libs.fabsmenu.TitleFAB
+                android:id="@+id/fab_menu_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@color/colorFabItemBackground"
+                app:fabSize="mini"
+                app:fab_title="@string/phone_title"
+                app:fab_title_textColor="@color/colorFabItem"
+                app:rippleColor="@android:color/white"
+                app:srcCompat="@drawable/ic_action_menu_phone" />
+
+        </jahirfiquitiva.libs.fabsmenu.FABsMenu>
+
+    </jahirfiquitiva.libs.fabsmenu.FABsMenuLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -3,5 +3,18 @@
     <color name="colorPrimary">#536d7a</color>
     <color name="colorPrimaryDark">#36474f</color>
     <color name="colorAccent">#ff4081</color>
+
     <color name="colorToolBarItem">#b0bfc6</color>
+
+    <!--arrows-->
+    <color name="colorGreen">#006064</color>
+    <color name="colorRed">#880e4f</color>
+
+    <!--fab colors-->
+    <color name="colorFabMenuBackground">#c41163</color>
+    <color name="colorFabMenuToggledBackground">#ec407a</color>
+
+    <color name="colorFabItem">#737e83</color>
+    <color name="colorFabItemBackground">#cfd8dd</color>
+
 </resources>

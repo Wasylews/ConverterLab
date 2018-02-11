@@ -5,6 +5,7 @@ import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 @Table(database = Database.class, name = "organization_currencies")
@@ -24,6 +25,12 @@ public class OrganizationCurrencyModel extends BaseModel {
 
     @Column
     private Double bid;
+
+    @Column(defaultValue = "1")
+    private boolean askUp;
+
+    @Column(defaultValue = "1")
+    private boolean bidUp;
 
     public Integer getId() {
         return id;
@@ -63,5 +70,38 @@ public class OrganizationCurrencyModel extends BaseModel {
 
     public void setBid(Double bid) {
         this.bid = bid;
+    }
+
+    public boolean isAskUp() {
+        return askUp;
+    }
+
+    public void setAskUp(boolean askUp) {
+        this.askUp = askUp;
+    }
+
+    public boolean isBidUp() {
+        return bidUp;
+    }
+
+    public void setBidUp(boolean bidUp) {
+        this.bidUp = bidUp;
+    }
+
+    @Override
+    public boolean save() {
+        OrganizationCurrencyModel oldModel = SQLite.select(OrganizationCurrencyModel_Table.ask,
+                OrganizationCurrencyModel_Table.bid)
+                .from(OrganizationCurrencyModel.class)
+                .where(OrganizationCurrencyModel_Table.currency_code.eq(currency.getCode()))
+                .and(OrganizationCurrencyModel_Table.organization_id.eq(organization.getId()))
+                .querySingle();
+
+        if (oldModel != null) {
+            setAskUp(oldModel.getAsk() <= getAsk());
+            setBidUp(oldModel.getBid() <= getBid());
+        }
+
+        return super.save();
     }
 }

@@ -11,6 +11,8 @@ class CurrencyMapper {
         currency.setName(model.getName());
         currency.setAsk(model.getAsk());
         currency.setBid(model.getBid());
+        currency.setAskUp(model.isAskUp());
+        currency.setBidUp(model.isBidUp());
 
         return currency;
     }

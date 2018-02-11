@@ -5,6 +5,8 @@ public class Currency {
     private Double mBid;
     private String mCode;
     private String mName;
+    private boolean mAskUp;
+    private boolean mBidUp;
 
     public Double getAsk() {
         return mAsk;
@@ -36,5 +38,21 @@ public class Currency {
 
     public void setName(String name) {
         mName = name;
+    }
+
+    public boolean isAskUp() {
+        return mAskUp;
+    }
+
+    public void setAskUp(boolean askUp) {
+        mAskUp = askUp;
+    }
+
+    public boolean isBidUp() {
+        return mBidUp;
+    }
+
+    public void setBidUp(boolean bidUp) {
+        mBidUp = bidUp;
     }
 }
