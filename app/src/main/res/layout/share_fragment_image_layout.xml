@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginStart="24dp"
+    android:layout_marginLeft="24dp"
+    android:layout_marginEnd="24dp"
+    android:layout_marginRight="24dp"
+    android:layout_marginTop="12dp">
+
+    <TextView
+        android:id="@+id/share_organization_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:textColor="@android:color/black"
+        tools:text="Organization" />
+
+    <TextView
+        android:id="@+id/share_organization_region"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Region" />
+
+    <TextView
+        android:id="@+id/share_organization_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="City" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/share_currency_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp" />
+
+
+</LinearLayout>

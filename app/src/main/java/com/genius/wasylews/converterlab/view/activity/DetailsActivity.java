@@ -1,12 +1,11 @@
 package com.genius.wasylews.converterlab.view.activity;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,12 +25,12 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
+import dagger.android.support.DaggerAppCompatActivity;
 import jahirfiquitiva.libs.fabsmenu.FABsMenu;
 import jahirfiquitiva.libs.fabsmenu.FABsMenuListener;
 import jahirfiquitiva.libs.fabsmenu.TitleFAB;
 
-public class DetailsActivity extends AppCompatActivity implements BaseDetailsView {
+public class DetailsActivity extends DaggerAppCompatActivity implements BaseDetailsView {
 
     private static final String EXTRA_ORGANIZATION_ID = "ORGANIZATION_ID";
 
@@ -78,7 +77,6 @@ public class DetailsActivity extends AppCompatActivity implements BaseDetailsVie
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
@@ -152,7 +150,7 @@ public class DetailsActivity extends AppCompatActivity implements BaseDetailsVie
     }
 
     private void openShareDialog() {
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
         ShareDialogFragment dialog = ShareDialogFragment.newInstance(mOrganization);
         dialog.show(fragmentManager, ShareDialogFragment.TAG);
