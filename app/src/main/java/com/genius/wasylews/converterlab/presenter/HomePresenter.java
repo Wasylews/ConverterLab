@@ -6,6 +6,7 @@ import android.util.Log;
 import com.genius.wasylews.converterlab.di.scope.PerActivity;
 import com.genius.wasylews.converterlab.view.BaseHomeView;
 import com.genius.wasylews.domain.model.Organization;
+import com.genius.wasylews.domain.usecase.FindOrganizations;
 import com.genius.wasylews.domain.usecase.GetOrganizationList;
 
 import javax.inject.Inject;
@@ -19,11 +20,13 @@ public class HomePresenter {
     private static final String TAG = HomePresenter.class.getSimpleName();
 
     private final GetOrganizationList mGetOrganizationList;
+    private final FindOrganizations mFindOrganizations;
     private BaseHomeView mView;
 
     @Inject
-    public HomePresenter(GetOrganizationList getOrganizationList) {
+    public HomePresenter(GetOrganizationList getOrganizationList, FindOrganizations findOrganizations) {
         mGetOrganizationList = getOrganizationList;
+        mFindOrganizations = findOrganizations;
     }
 
     public BaseHomeView getView() {
@@ -59,5 +62,13 @@ public class HomePresenter {
 
     public void showDetails(Organization organization) {
         mView.showOrganizationDetails(organization);
+    }
+
+    public void findOrganizations(String filter) {
+        mFindOrganizations.execute(filter)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mView::showOrganizations,
+                        throwable -> Log.d(TAG, "Error on subscribe", throwable));
     }
 }

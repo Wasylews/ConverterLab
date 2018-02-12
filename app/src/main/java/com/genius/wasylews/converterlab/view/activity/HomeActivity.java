@@ -7,6 +7,7 @@ import android.support.annotation.IdRes;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -25,7 +26,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerAppCompatActivity;
 
-public class HomeActivity extends DaggerAppCompatActivity implements BaseHomeView, OrganizationsAdapter.CardToolbarItemClickedListener {
+public class HomeActivity extends DaggerAppCompatActivity implements BaseHomeView,
+        OrganizationsAdapter.CardToolbarItemClickedListener {
 
     @Inject
     HomePresenter presenter;
@@ -41,6 +43,8 @@ public class HomeActivity extends DaggerAppCompatActivity implements BaseHomeVie
 
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
+
+    SearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,19 @@ public class HomeActivity extends DaggerAppCompatActivity implements BaseHomeVie
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home_activity_search_menu, menu);
+        mSearchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                presenter.findOrganizations(s);
+                return true;
+            }
+        });
         return true;
     }
 
