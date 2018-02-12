@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     app:cardElevation="8dp"
     app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="false"
     app:cardBackgroundColor="@color/cardview_light_background">
 
     <android.support.constraint.ConstraintLayout
@@ -93,7 +94,7 @@
             android:id="@+id/card_toolbar"
             layout="@layout/home_activity_row_toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
