@@ -51,8 +51,12 @@ public class OrganizationsAdapter extends RecyclerView.Adapter<OrganizationsAdap
         holder.organizationRegionTextView.setText(item.getRegion());
         holder.organizationCityTextView.setText(item.getCity());
 
-        String phone = NumberFormatter.format("xxx xx xxx xx", item.getPhone());
-        holder.organizationPhoneTextView.setText(phone);
+        try {
+            String phone = NumberFormatter.format("xxx xx xxx xx", item.getPhone());
+            holder.organizationPhoneTextView.setText(phone);
+        } catch (IllegalArgumentException e) {
+            holder.organizationPhoneTextView.setText("-");
+        }
 
         holder.organizationLocationTextView.setText(item.getAddress());
 

@@ -166,8 +166,12 @@ public class DetailsActivity extends DaggerAppCompatActivity implements BaseDeta
         mOrganizationName.setText(organization.getTitle());
         mOrganizationAddress.setText(organization.getAddress());
 
-        String phone = NumberFormatter.format("(xxxx) xx-xx-xx", organization.getPhone());
-        mOrganizationPhone.setText(phone);
+        try {
+            String phone = NumberFormatter.format("(xxxx) xx-xx-xx", organization.getPhone());
+            mOrganizationPhone.setText(phone);
+        } catch (IllegalArgumentException e) {
+            mOrganizationPhone.setText("-");
+        }
 
         mAdapter.setCurrencyList(organization.getCurrencies());
 
