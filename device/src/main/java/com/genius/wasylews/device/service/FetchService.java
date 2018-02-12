@@ -29,7 +29,9 @@ public class FetchService extends DaggerService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG, "Running service");
-        repository.fetchOrganizations().subscribe(this::stopSelf);
+        repository.fetchOrganizations()
+                .onErrorComplete()
+                .subscribe(this::stopSelf);
         return START_STICKY;
     }
 

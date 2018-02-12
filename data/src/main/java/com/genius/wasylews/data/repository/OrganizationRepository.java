@@ -2,32 +2,27 @@ package com.genius.wasylews.data.repository;
 
 import android.util.Log;
 
-import com.genius.wasylews.data.database.model.OrganizationCurrencyModel;
-import com.genius.wasylews.data.database.model.OrganizationModel;
-import com.genius.wasylews.data.database.model.OrganizationModel_Table;
-import com.genius.wasylews.data.database.model.mapper.OrganizationCurrencyModelMapper;
-import com.genius.wasylews.data.database.model.mapper.OrganizationMapper;
+import com.genius.wasylews.data.database.DbCacheManager;
 import com.genius.wasylews.data.net.RestService;
 import com.genius.wasylews.device.preferences.PreferencesManager;
 import com.genius.wasylews.domain.model.Organization;
 import com.genius.wasylews.domain.network.NetworkManager;
 import com.genius.wasylews.domain.repository.Repository;
-import com.raizlabs.android.dbflow.rx2.language.RXSQLite;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class OrganizationRepository implements Repository {
 
     private final RestService mRestAdapter;
+
+    private final DbCacheManager mCacheManager;
 
     private final PreferencesManager mPreferencesManager;
 
@@ -39,57 +34,44 @@ public class OrganizationRepository implements Repository {
 
     @Inject
     public OrganizationRepository(RestService adapter,
+                                  DbCacheManager cacheManager,
                                   PreferencesManager preferencesManager,
                                   NetworkManager connectionManager) {
         mRestAdapter = adapter;
+        mCacheManager = cacheManager;
         mPreferencesManager = preferencesManager;
         mConnectionManager = connectionManager;
     }
 
     @Override
     public Single<List<Organization>> getOrganizations() {
-        return RXSQLite.rx(SQLite.select().from(OrganizationModel.class))
-                .queryList()
-                .doOnSubscribe((disposable) -> this.fetchOrganizations())
-                .toFlowable()
-                .flatMapIterable(organizationModels -> organizationModels)
-                .map(OrganizationMapper::transform)
-                .toList();
+        return fetchOrganizations()
+                .onErrorComplete()
+                .andThen(mCacheManager.getOrganizationList());
     }
 
-    public void fetchOrganizations() {
+    public Completable fetchOrganizations() {
         if (!mConnectionManager.isConnected()) {
-            return;
+            return Completable.error(new Exception("No internet"));
         }
 
         Log.d(TAG, "Fetching from service");
-        mRestAdapter.getOrganizations()
-                .filter(serviceResponse -> {
+        return mRestAdapter.getOrganizations()
+                .doOnSuccess(response -> {
                     Date lastDate = mPreferencesManager.getDate(LAST_DATE_KEY);
-                    Date currentDate = serviceResponse.getDate();
+                    Date currentDate = response.getDate();
 
-                    if (currentDate != null) {
-                        if (currentDate.after(lastDate)) {
-                            Log.d(TAG, "Update date");
-                            mPreferencesManager.putDate(LAST_DATE_KEY, currentDate);
-                            return true;
-                        }
+                    if (currentDate != null && currentDate.after(lastDate)) {
+                        Log.d(TAG, "Update date");
+                        mPreferencesManager.putDate(LAST_DATE_KEY, currentDate);
+
+                        mCacheManager.save(response);
                     }
-                    return false;
-                })
-                .map(OrganizationCurrencyModelMapper::transform)
-                .toFlowable()
-                .flatMapIterable(organizationCurrencyModels -> organizationCurrencyModels)
-                .observeOn(Schedulers.io())
-                .subscribe(OrganizationCurrencyModel::save);
+                }).toCompletable();
     }
 
     @Override
     public Single<Organization> getOrganization(String id) {
-        return RXSQLite.rx(SQLite.select().from(OrganizationModel.class)
-                .where(OrganizationModel_Table.id.eq(id)))
-                .querySingle()
-                .toSingle()
-                .map(OrganizationMapper::transform);
+        return mCacheManager.getOrganization(id);
     }
 }
