@@ -26,11 +26,11 @@ public class OrganizationCurrencyModel extends BaseModel {
     @Column
     private Double bid;
 
-    @Column(defaultValue = "1")
-    private boolean askUp;
+    @Column
+    private boolean askUp = true;
 
-    @Column(defaultValue = "1")
-    private boolean bidUp;
+    @Column
+    private boolean bidUp = true;
 
     public Integer getId() {
         return id;
