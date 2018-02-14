@@ -50,24 +50,26 @@ public class OrganizationRepository implements Repository {
                 .andThen(mCacheManager.getOrganizationList());
     }
 
+    @Override
     public Completable fetchOrganizations() {
         if (!mConnectionManager.isConnected()) {
-            return Completable.error(new Exception("No internet"));
+            return Completable.complete();
         }
 
         Log.d(TAG, "Fetching from service");
-        return mRestAdapter.getOrganizations()
-                .doOnSuccess(response -> {
-                    Date lastDate = mPreferencesManager.getDate(LAST_DATE_KEY);
-                    Date currentDate = response.getDate();
+        return mRestAdapter.getOrganizations().flatMapCompletable(response -> {
+            Date lastDate = mPreferencesManager.getDate(LAST_DATE_KEY);
+            Date currentDate = response.getDate();
 
-                    if (currentDate != null && currentDate.after(lastDate)) {
-                        Log.d(TAG, "Update date");
-                        mPreferencesManager.putDate(LAST_DATE_KEY, currentDate);
+            if (currentDate != null && currentDate.after(lastDate)) {
+                Log.d(TAG, "Update date");
+                mPreferencesManager.putDate(LAST_DATE_KEY, currentDate);
 
-                        mCacheManager.save(response);
-                    }
-                }).toCompletable();
+                return mCacheManager.save(response);
+            }
+
+            return Completable.complete();
+        });
     }
 
     @Override
