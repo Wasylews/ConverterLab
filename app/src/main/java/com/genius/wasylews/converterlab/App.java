@@ -32,7 +32,8 @@ public class App extends DaggerApplication {
     private void setupAlarm() {
         PendingIntent intent = FetchService.newIntent(this);
 
-        mAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, AlarmManager.INTERVAL_HALF_HOUR,
+        mAlarmManager.setInexactRepeating(AlarmManager.RTC,
+                System.currentTimeMillis() + AlarmManager.INTERVAL_HALF_HOUR,
                 AlarmManager.INTERVAL_HALF_HOUR, intent);
     }
 
