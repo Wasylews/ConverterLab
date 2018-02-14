@@ -44,13 +44,9 @@ public class MapActivity extends DaggerAppCompatActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        String organizationId = savedInstanceState.getString(EXTRA_ORGANIZATION);
+        String organizationId = getIntent().getStringExtra(EXTRA_ORGANIZATION);
+        presenter.setView(this);
         presenter.showOnMap(organizationId);
     }
 
