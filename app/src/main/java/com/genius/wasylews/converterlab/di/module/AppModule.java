@@ -9,6 +9,7 @@ import com.genius.wasylews.converterlab.view.activity.DetailsActivity;
 import com.genius.wasylews.converterlab.view.activity.HomeActivity;
 import com.genius.wasylews.converterlab.view.activity.MapActivity;
 import com.genius.wasylews.converterlab.view.fragment.ShareDialogFragment;
+import com.genius.wasylews.device.service.FetchService;
 
 import dagger.Binds;
 import dagger.Module;
@@ -32,9 +33,12 @@ public interface AppModule {
 
     @PerActivity
     @ContributesAndroidInjector
-    abstract DetailsActivity detailsActivityInjector();
+    DetailsActivity detailsActivityInjector();
 
     @PerFragment
     @ContributesAndroidInjector
-    abstract ShareDialogFragment shareDialogFragmentInjector();
+    ShareDialogFragment shareDialogFragmentInjector();
+
+    @ContributesAndroidInjector
+    FetchService fetchServiceInjector();
 }

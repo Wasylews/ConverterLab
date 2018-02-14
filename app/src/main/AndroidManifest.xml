@@ -21,10 +21,6 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity android:name=".view.activity.MapActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -36,6 +32,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.activity.HomeActivity" />
         </activity>
+
+        <service android:name="com.genius.wasylews.device.service.FetchService"
+            android:enabled="true"/>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
     </application>
 
 </manifest>
