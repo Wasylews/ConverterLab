@@ -58,12 +58,18 @@ public class MapActivity extends DaggerAppCompatActivity implements OnMapReadyCa
 
     @Override
     public void showMarker(Location location) {
+        if (!location.isValid()) {
+            Toast.makeText(this, R.string.location_not_found, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (mMap != null) {
             LatLng marker = new LatLng(location.getLat(), location.getLng());
             mMap.addMarker(new MarkerOptions().position(marker));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(20));
         } else {
-            Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT).show();
         }
     }
 }
