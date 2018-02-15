@@ -8,6 +8,9 @@ import com.genius.wasylews.domain.usecase.GetOrganizationLocation;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 @PerActivity
 public class MapPresenter {
 
@@ -29,7 +32,9 @@ public class MapPresenter {
 
     public void showOnMap(String organizationId) {
         mGetOrganizationLocation.execute(organizationId)
-                .onErrorReturnItem(new Location(0, 0))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorReturnItem(new Location()) // return invalid location
                 .subscribe(location -> mView.showMarker(location));
     }
 }
