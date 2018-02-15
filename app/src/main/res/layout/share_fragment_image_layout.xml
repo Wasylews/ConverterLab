@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:textStyle="bold"
         android:textColor="@android:color/black"
         tools:text="Organization" />
 
@@ -22,12 +23,16 @@
         android:id="@+id/share_organization_region"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/black"
         tools:text="Region" />
 
     <TextView
         android:id="@+id/share_organization_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/black"
         tools:text="City" />
 
     <android.support.v7.widget.RecyclerView
