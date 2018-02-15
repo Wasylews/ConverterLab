@@ -3,6 +3,7 @@ package com.genius.wasylews.converterlab.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.genius.wasylews.converterlab.R;
 import com.genius.wasylews.converterlab.presenter.MapPresenter;
@@ -57,8 +58,12 @@ public class MapActivity extends DaggerAppCompatActivity implements OnMapReadyCa
 
     @Override
     public void showMarker(Location location) {
-        LatLng marker = new LatLng(location.getLat(), location.getLng());
-        mMap.addMarker(new MarkerOptions().position(marker));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
+        if (mMap != null) {
+            LatLng marker = new LatLng(location.getLat(), location.getLng());
+            mMap.addMarker(new MarkerOptions().position(marker));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
+        } else {
+            Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show();
+        }
     }
 }
