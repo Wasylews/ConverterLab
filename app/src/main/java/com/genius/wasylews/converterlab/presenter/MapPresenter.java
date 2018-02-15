@@ -3,9 +3,13 @@ package com.genius.wasylews.converterlab.presenter;
 
 import com.genius.wasylews.converterlab.di.scope.PerActivity;
 import com.genius.wasylews.converterlab.view.BaseMapView;
+import com.genius.wasylews.domain.model.Location;
 import com.genius.wasylews.domain.usecase.GetOrganizationLocation;
 
 import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 @PerActivity
 public class MapPresenter {
@@ -28,6 +32,9 @@ public class MapPresenter {
 
     public void showOnMap(String organizationId) {
         mGetOrganizationLocation.execute(organizationId)
-                .subscribe(mView::showMarker);
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorReturnItem(new Location()) // return invalid location
+                .subscribe(location -> mView.showMarker(location));
     }
 }

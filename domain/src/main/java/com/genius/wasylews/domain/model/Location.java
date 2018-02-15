@@ -1,8 +1,10 @@
 package com.genius.wasylews.domain.model;
 
 public class Location {
-    private double mLat;
-    private double mLng;
+    private double mLat = -1;
+    private double mLng = -1;
+
+    public Location() {}
 
     public Location(double lat, double lng) {
         mLat = lat;
@@ -15,5 +17,9 @@ public class Location {
 
     public double getLng() {
         return mLng;
+    }
+
+    public boolean isValid() {
+        return mLat != -1 && mLng != -1;
     }
 }

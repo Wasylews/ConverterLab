@@ -29,9 +29,19 @@ public class GetOrganizationLocation {
     }
 
     private Single<Location> getLocation(Organization organization) {
-        String locationName = String.format("%s %s %s",
-                organization.getRegion(), organization.getCity(), organization.getAddress());
+        String locationName;
 
-        return mLocationManager.findLocation(locationName).firstOrError();
+        // google maps can't find place if region == city
+        if (!organization.getRegion().equals(organization.getCity())) {
+            locationName = String.format("%s %s %s", organization.getRegion(),
+                    organization.getCity(), organization.getAddress());
+        } else {
+            locationName = String.format("%s %s",
+                    organization.getCity(), organization.getAddress());
+        }
+
+        return mLocationManager.findLocation(locationName)
+                .firstElement()
+                .toSingle();
     }
 }

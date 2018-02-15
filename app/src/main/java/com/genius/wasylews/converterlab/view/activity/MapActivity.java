@@ -3,6 +3,7 @@ package com.genius.wasylews.converterlab.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.genius.wasylews.converterlab.R;
 import com.genius.wasylews.converterlab.presenter.MapPresenter;
@@ -44,13 +45,9 @@ public class MapActivity extends DaggerAppCompatActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        String organizationId = savedInstanceState.getString(EXTRA_ORGANIZATION);
+        String organizationId = getIntent().getStringExtra(EXTRA_ORGANIZATION);
+        presenter.setView(this);
         presenter.showOnMap(organizationId);
     }
 
@@ -61,8 +58,18 @@ public class MapActivity extends DaggerAppCompatActivity implements OnMapReadyCa
 
     @Override
     public void showMarker(Location location) {
-        LatLng marker = new LatLng(location.getLat(), location.getLng());
-        mMap.addMarker(new MarkerOptions().position(marker));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
+        if (!location.isValid()) {
+            Toast.makeText(this, R.string.location_not_found, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (mMap != null) {
+            LatLng marker = new LatLng(location.getLat(), location.getLng());
+            mMap.addMarker(new MarkerOptions().position(marker));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(20));
+        } else {
+            Toast.makeText(this, R.string.no_internet, Toast.LENGTH_SHORT).show();
+        }
     }
 }
