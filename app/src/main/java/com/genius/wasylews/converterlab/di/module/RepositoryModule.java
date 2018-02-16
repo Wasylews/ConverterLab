@@ -1,8 +1,10 @@
 package com.genius.wasylews.converterlab.di.module;
 
 import com.genius.wasylews.converterlab.BuildConfig;
+import com.genius.wasylews.data.net.ProgressResponseBody;
 import com.genius.wasylews.data.net.RestService;
 import com.genius.wasylews.data.repository.OrganizationRepository;
+import com.genius.wasylews.domain.repository.ProgressListener;
 import com.genius.wasylews.domain.repository.Repository;
 
 import javax.inject.Singleton;
@@ -11,6 +13,7 @@ import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -41,8 +44,13 @@ public interface RepositoryModule {
 
     @Singleton
     @Provides
-    static OkHttpClient provideClient() {
+    static OkHttpClient provideClient(ProgressListener listener) {
         return new OkHttpClient.Builder()
-                .build();
+                .addNetworkInterceptor(chain -> {
+                    Response original = chain.proceed(chain.request());
+                    return original.newBuilder()
+                            .body(new ProgressResponseBody(original.body(), listener))
+                            .build();
+                }).build();
     }
 }
