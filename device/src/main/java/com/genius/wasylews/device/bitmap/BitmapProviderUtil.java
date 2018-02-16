@@ -10,7 +10,7 @@ import com.genius.wasylews.domain.bitmap.BitmapProvider;
 import javax.inject.Inject;
 
 public class BitmapProviderUtil implements BitmapProvider {
-    private Context mContext;
+    private final Context mContext;
 
     @Inject
     public BitmapProviderUtil(Context context) {

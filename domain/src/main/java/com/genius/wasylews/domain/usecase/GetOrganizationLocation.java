@@ -14,8 +14,8 @@ import io.reactivex.Single;
 @Singleton
 public class GetOrganizationLocation {
 
-    private LocationManager mLocationManager;
-    private Repository mRepository;
+    private final LocationManager mLocationManager;
+    private final Repository mRepository;
 
     @Inject
     public GetOrganizationLocation(LocationManager manager, Repository repository) {

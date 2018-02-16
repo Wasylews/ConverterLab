@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +65,7 @@ public class ShareDialogFragment extends DaggerAppCompatDialogFragment implement
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.share_fragment_layout, container, false);
         ButterKnife.bind(this, rootView);
 
@@ -96,7 +97,7 @@ public class ShareDialogFragment extends DaggerAppCompatDialogFragment implement
             shareIntent.setType("image/*");
             shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             startActivity(Intent.createChooser(shareIntent,
-                    getResources().getString(R.string.share_title)));
+                    getString(R.string.share_title)));
         }
     }
 

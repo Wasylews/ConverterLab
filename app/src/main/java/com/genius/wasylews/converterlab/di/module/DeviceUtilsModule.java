@@ -69,7 +69,7 @@ public interface DeviceUtilsModule {
         }
 
         return new NotificationCompat.Builder(context, "default")
-                .setSmallIcon(R.drawable.ic_launcher_background);
+                .setSmallIcon(R.mipmap.ic_launcher);
     }
 
     @Singleton

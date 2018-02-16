@@ -32,7 +32,7 @@ public class BitmapViewHolder {
     @BindView(R.id.share_currency_list)
     RecyclerView mRecyclerView;
 
-    private Context mContext;
+    private final Context mContext;
 
     @Inject
     public BitmapViewHolder(Context context) {

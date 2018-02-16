@@ -24,7 +24,7 @@ import dagger.android.support.DaggerAppCompatActivity;
 public class MapActivity extends DaggerAppCompatActivity implements OnMapReadyCallback, BaseMapView {
 
     @Inject
-    MapPresenter presenter;
+    MapPresenter mPresenter;
 
     private static final String EXTRA_ORGANIZATION = "ORGANIZATION_ID";
 
@@ -47,8 +47,8 @@ public class MapActivity extends DaggerAppCompatActivity implements OnMapReadyCa
         mapFragment.getMapAsync(this);
 
         String organizationId = getIntent().getStringExtra(EXTRA_ORGANIZATION);
-        presenter.setView(this);
-        presenter.showOnMap(organizationId);
+        mPresenter.setView(this);
+        mPresenter.showOnMap(organizationId);
     }
 
     @Override

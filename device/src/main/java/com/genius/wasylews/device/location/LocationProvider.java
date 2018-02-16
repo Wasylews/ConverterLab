@@ -22,8 +22,8 @@ import io.reactivex.Flowable;
 @Singleton
 public class LocationProvider implements LocationManager {
 
-    private GeoDataClient mGeoDataClient;
-    private NetworkManager mNetworkManager;
+    private final GeoDataClient mGeoDataClient;
+    private final NetworkManager mNetworkManager;
 
     @Inject
     public LocationProvider(GeoDataClient geoDataClient, NetworkManager networkManager) {

@@ -31,10 +31,10 @@ public class HomeActivity extends DaggerAppCompatActivity implements BaseHomeVie
         OrganizationsAdapter.CardToolbarItemClickedListener {
 
     @Inject
-    HomePresenter presenter;
+    HomePresenter mPresenter;
 
     @Inject
-    OrganizationsAdapter adapter;
+    OrganizationsAdapter mAdapter;
 
     @Inject
     NotificationUtil mNotificationManager;
@@ -58,14 +58,14 @@ public class HomeActivity extends DaggerAppCompatActivity implements BaseHomeVie
         ButterKnife.bind(this);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(mAdapter);
 
-        adapter.setMenuItemClickedListener(this);
+        mAdapter.setMenuItemClickedListener(this);
 
-        mSwipeRefreshLayout.setOnRefreshListener(presenter::loadList);
+        mSwipeRefreshLayout.setOnRefreshListener(mPresenter::loadList);
 
-        presenter.setView(this);
-        presenter.loadList();
+        mPresenter.setView(this);
+        mPresenter.loadList();
     }
 
     @Override
@@ -80,7 +80,7 @@ public class HomeActivity extends DaggerAppCompatActivity implements BaseHomeVie
 
             @Override
             public boolean onQueryTextChange(String s) {
-                presenter.findOrganizations(s);
+                mPresenter.findOrganizations(s);
                 return true;
             }
         });
@@ -89,7 +89,7 @@ public class HomeActivity extends DaggerAppCompatActivity implements BaseHomeVie
 
     @Override
     public void showOrganizations(List<Organization> list) {
-        adapter.setOrganizations(list);
+        mAdapter.setOrganizations(list);
     }
 
     @Override
@@ -108,16 +108,16 @@ public class HomeActivity extends DaggerAppCompatActivity implements BaseHomeVie
     public boolean onItemClicked(@IdRes int buttonId, Organization organization) {
         switch (buttonId) {
             case R.id.card_toolbar_link:
-                presenter.openOrganizationSite(organization);
+                mPresenter.openOrganizationSite(organization);
                 break;
             case R.id.card_toolbar_map:
-                presenter.showOnMap(organization);
+                mPresenter.showOnMap(organization);
                 break;
             case R.id.card_toolbar_phone:
-                presenter.callOrganization(organization);
+                mPresenter.callOrganization(organization);
                 break;
             case R.id.card_toolbar_details:
-                presenter.showDetails(organization);
+                mPresenter.showDetails(organization);
                 break;
             default:
                 return false;

@@ -14,7 +14,7 @@ import io.reactivex.schedulers.Schedulers;
 @PerActivity
 public class MapPresenter {
 
-    private GetOrganizationLocation mGetOrganizationLocation;
+    private final GetOrganizationLocation mGetOrganizationLocation;
     private BaseMapView mView;
 
     @Inject

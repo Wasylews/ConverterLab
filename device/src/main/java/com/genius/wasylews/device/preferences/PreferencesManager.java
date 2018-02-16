@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 public class PreferencesManager {
 
-    private SharedPreferences mPreferences;
+    private final SharedPreferences mPreferences;
 
     @Inject
     public PreferencesManager(SharedPreferences preferences) {

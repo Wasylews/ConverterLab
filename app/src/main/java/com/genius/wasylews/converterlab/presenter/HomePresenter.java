@@ -3,6 +3,7 @@ package com.genius.wasylews.converterlab.presenter;
 
 import android.util.Log;
 
+import com.genius.wasylews.converterlab.BuildConfig;
 import com.genius.wasylews.converterlab.di.scope.PerActivity;
 import com.genius.wasylews.converterlab.view.BaseHomeView;
 import com.genius.wasylews.domain.model.Organization;
@@ -44,8 +45,10 @@ public class HomePresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(mView::hideProgress)
-                .subscribe(mView::showOrganizations,
-                        throwable -> Log.d(TAG, "Error on subscribe", throwable));
+                .subscribe(mView::showOrganizations, throwable -> {
+                    if (BuildConfig.DEBUG)
+                        Log.d(TAG, "Error on subscribe", throwable);
+                });
     }
 
     public void openOrganizationSite(Organization organization) {
@@ -68,7 +71,9 @@ public class HomePresenter {
         mFindOrganizations.execute(filter)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mView::showOrganizations,
-                        throwable -> Log.d(TAG, "Error on subscribe", throwable));
+                .subscribe(mView::showOrganizations, throwable -> {
+                            if (BuildConfig.DEBUG)
+                                Log.d(TAG, "Error on subscribe", throwable);
+                        });
     }
 }
