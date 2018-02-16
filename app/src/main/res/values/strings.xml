@@ -15,4 +15,5 @@
     <string name="fab_menu_map_title">Карта</string>
     <string name="fab_menu_link_title">Сайт</string>
     <string name="share_dialog_button_title">Share</string>
+    <string name="database_update_notification">Database updated successfully.</string>
 </resources>

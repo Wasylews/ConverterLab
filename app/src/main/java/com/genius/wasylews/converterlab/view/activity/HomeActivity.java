@@ -16,6 +16,7 @@ import com.genius.wasylews.converterlab.R;
 import com.genius.wasylews.converterlab.presenter.HomePresenter;
 import com.genius.wasylews.converterlab.view.BaseHomeView;
 import com.genius.wasylews.converterlab.view.OrganizationsAdapter;
+import com.genius.wasylews.device.notification.NotificationUtil;
 import com.genius.wasylews.domain.model.Organization;
 
 import java.util.List;
@@ -34,6 +35,9 @@ public class HomeActivity extends DaggerAppCompatActivity implements BaseHomeVie
 
     @Inject
     OrganizationsAdapter adapter;
+
+    @Inject
+    NotificationUtil mNotificationManager;
 
     @BindView(R.id.home_activity_recycler_view)
     RecyclerView mRecyclerView;
@@ -97,6 +101,7 @@ public class HomeActivity extends DaggerAppCompatActivity implements BaseHomeVie
     public void hideProgress() {
         mProgressTextView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(false);
+        mNotificationManager.showNotification(getString(R.string.database_update_notification));
     }
 
     @Override
