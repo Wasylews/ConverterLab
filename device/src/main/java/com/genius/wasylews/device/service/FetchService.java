@@ -16,8 +16,9 @@ import dagger.android.DaggerService;
 public class FetchService extends DaggerService {
 
     private static final String TAG = FetchService.class.getSimpleName();
+
     @Inject
-    Repository repository;
+    Repository mRepository;
 
     public static PendingIntent newIntent(Context context) {
         Intent intent = new Intent(context, FetchService.class);
@@ -29,7 +30,7 @@ public class FetchService extends DaggerService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG, "Running service");
-        repository.fetchOrganizations()
+        mRepository.fetchOrganizations()
                 .onErrorComplete()
                 .subscribe(this::stopSelf);
         return START_STICKY;

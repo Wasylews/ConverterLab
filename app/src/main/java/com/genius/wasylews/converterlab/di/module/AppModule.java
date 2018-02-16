@@ -10,9 +10,16 @@ import com.genius.wasylews.converterlab.view.activity.HomeActivity;
 import com.genius.wasylews.converterlab.view.activity.MapActivity;
 import com.genius.wasylews.converterlab.view.fragment.ShareDialogFragment;
 import com.genius.wasylews.device.service.FetchService;
+import com.genius.wasylews.domain.notification.NotificationManagerUtil;
+import com.genius.wasylews.domain.repository.ProgressListener;
+
+import java.util.Locale;
+
+import javax.inject.Singleton;
 
 import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 
@@ -41,4 +48,17 @@ public interface AppModule {
 
     @ContributesAndroidInjector
     FetchService fetchServiceInjector();
+
+    @Provides
+    @Singleton
+    static ProgressListener provideProgressListener(NotificationManagerUtil notificationManager) {
+        return (bytesRead, contentLength, done) -> {
+            if (!done) {
+                long progressPercent = bytesRead * 100 / contentLength;
+                notificationManager.showProgress((int)bytesRead, (int) contentLength,
+                        String.format(Locale.getDefault(),
+                                "Updating %d %%...", progressPercent));
+            }
+        };
+    }
 }
